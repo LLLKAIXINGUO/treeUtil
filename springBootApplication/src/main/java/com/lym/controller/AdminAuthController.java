@@ -1,6 +1,6 @@
 package com.lym.controller;
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lym.AdminAuth;
 import com.lym.AdminAuthMapper;
 import com.lym.service.AdminAuthService;
@@ -47,7 +47,7 @@ public class AdminAuthController {
      * @return
      */
     public List<AdminAuth> iterateAdminAuths(List<AdminAuth> adminAuthVOList,Integer pid){
-        List<AdminAuth> result = new ArrayList<AdminAuth>();
+        List<AdminAuth> result = new ArrayList<>();
         for (AdminAuth adminAuth : adminAuthVOList) {
             //获取菜单的id
             Integer authId = adminAuth.getAuthId();
@@ -62,6 +62,30 @@ public class AdminAuthController {
         }
         }
         return result;
+    }
+
+    @RequestMapping("/getList")
+    public String getList(){
+        QueryWrapper<AdminAuth> wrapper = new QueryWrapper<>();
+        List<AdminAuth> adminAuths1 = adminAuthMapper.selectList(wrapper);
+        for (AdminAuth adminAuth : adminAuths1) {
+            System.out.println(adminAuth);
+        }
+//        wrapper.eq("auth_pid",-1);
+//        System.out.println("========================");
+//        List<AdminAuth> adminAuths2 = adminAuthMapper.selectList(wrapper);
+//        for (AdminAuth adminAuth : adminAuths2) {
+//            System.out.println(adminAuth);
+//        }
+        adminAuths1.stream().filter(item -> {
+            return item.getAuthPid()==-1;
+
+        });
+
+        System.out.println("====================");
+
+
+        return "adminAuths2";
     }
 
 

@@ -1,16 +1,14 @@
-package com.lym;
+package com.lym.vo;
 
-
-import io.swagger.annotations.ApiModel;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.lym.AdminAuth;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
+import java.util.List;
 
 @Data
-@ApiModel(value="AdminAuth对象")
-public class AdminAuth implements Serializable {
-
+public class AdminAuthVO {
     private static final long serialVersionUID = 1L;
 
     private Integer authId;
@@ -25,11 +23,8 @@ public class AdminAuth implements Serializable {
     private Integer authPid;
 
     @ApiModelProperty(value = "菜单的类型   权限/按钮")
-    private String authTypr;
+    private String authType;
 
     @ApiModelProperty(value = "排序序号")
     private Integer authSort;
-
-
-
 }
